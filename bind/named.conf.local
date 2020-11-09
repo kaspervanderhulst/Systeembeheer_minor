@@ -6,3 +6,7 @@
 // organization
 //include "/etc/bind/zones.rfc1918";
 
+zone "kasper-vanderhulst.sb.uclllabs.be" {
+  type master;
+  file "/etc/bind/zones/db.kasper-vanderhulst.sb.uclllabs.be";
+};
