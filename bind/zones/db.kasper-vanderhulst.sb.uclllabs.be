@@ -1,7 +1,7 @@
 ; BIND data file for kasper-vanderhulst.sb.uclllabs.be
 ;
 $TTL	300
-@	IN	SOA	ns.kasper-vanderhulst.sb.uclllabs.be. host.kasper-vanderhulst.sb.uclllabs.be (
+@	IN	SOA	ns.kasper-vanderhulst.sb.uclllabs.be. host.kasper-vanderhulst.sb.uclllabs.be. (
 			     22		; Serial
 			    900		; Refresh
 			    120		; Retry
@@ -11,8 +11,8 @@ $TTL	300
 
 ; Name server
 @	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.
-@	IN      NS	ns1.uclllabs.be
-@	IN	NS	ns2.uclllabs.be
+@	IN      NS	ns1.uclllabs.be.
+@	IN	NS	ns2.uclllabs.be.
 
 subzone IN NS ns
 
