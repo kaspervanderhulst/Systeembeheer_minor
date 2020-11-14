@@ -2,7 +2,7 @@
 ;
 $TTL	300
 @	IN	SOA	ns.kasper-vanderhulst.sb.uclllabs.be. host.kasper-vanderhulst.sb.uclllabs.be. (
-			     22		; Serial
+			     24		; Serial
 			    900		; Refresh
 			    120		; Retry
 			    900		; Expire
@@ -23,4 +23,10 @@ subzone IN NS ns
 @    IN A 193.191.177.166
 ns   IN A 193.191.177.166
 www  IN A 193.191.177.166
+www1 IN A 193.191.177.166
+www2 IN A 193.191.177.166
 test IN A 193.191.177.254
+foobar	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.
+foobar	IN	A	193.191.177.166
+bar	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.
+bar	IN	A	193.191.177.166

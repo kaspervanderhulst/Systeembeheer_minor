@@ -6,7 +6,7 @@
 // organization
 //include "/etc/bind/zones.rfc1918";
 
-include "/etc/bind/named.conf.mrt-zones";
+//include "/etc/bind/named.conf.mrt-zones";
 
 zone "kasper-vanderhulst.sb.uclllabs.be" {
   type master;
