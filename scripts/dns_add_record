@@ -12,7 +12,7 @@ if [ "$1" == "-t" ];then
 		echo "$3	     IN	       A	$4" >> /etc/bind/zones/zone.$ZONE
 		perl -i -pe '/Serial/ && s/(\d+)/$1+1 . $2/e' /etc/bind/zones/zone.$ZONE
 	elif [ "$TYPE" = "CNAME" ]
-	then 
+	then
 		ZONE="`echo $4 | awk -F . '{print $1}'`"
 		echo "$3	    IN	     CNAME	$4" >> /etc/bind/zones/zone.$ZONE
 		perl -i  -pe '/Serial/ && s/(\d+)/$1+1 . $2/e' /etc/bind/zones/zone.$ZONE

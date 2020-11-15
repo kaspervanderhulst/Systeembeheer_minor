@@ -6,7 +6,7 @@ touch /etc/bind/zones/zone.$1
 
 #add the settings to the zone file
 echo "\$TTL 360
-@    IN SOA ns.$1.kasper-vanderhulst.sb.uclllabs.be. host.ns.kasper-vanderhulst.sb.uclllabs.be. (
+@    IN SOA ns.$1.kasper-vanderhulst.sb.uclllabs.be. host.kasper-vanderhulst.sb.uclllabs.be. (
 		0	; Serial
 		3H	; Refresh
 		1H	; Retry
@@ -16,17 +16,17 @@ echo "\$TTL 360
 @		IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be." > /etc/bind/zones/zone.$1
 
 # Add the records for the new subzone to the main zone
-echo "$1	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be." >> /etc/bind/zones/db.ns.kasper-vanderhulst.sb.uclllabs.be
-echo "$1	IN	A	193.191.177.166" >> /etc/bind/zones/db.ns.kasper-vanderhulst.sb.uclllabs.be
+echo "$1	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be." >> /etc/bind/zones/db.kasper-vanderhulst.sb.uclllabs.be
+echo "$1	IN	A	193.191.177.166" >> /etc/bind/zones/db.kasper-vanderhulst.sb.uclllabs.be
 
 # put a description for the zone in the config
 echo "zone \"$1.kasper-vanderhulst.sb.uclllabs.be\" {
 	type master;
-	file \"/etc/bind/zones/zone.$1";
+	file \"/etc/bind/zones/zone.$1\";
 };" >> /etc/bind/named.conf.mrt-zones
 
 # Increment the serials by 1
-perl -i -pe '/Serial/ && s/(\d+)/$1+1 . $2/e' /etc/bind/zones/db.ns.kasper-vanderhulst.sb.uclllabs.be
+perl -i -pe '/Serial/ && s/(\d+)/$1+1 . $2/e' /etc/bind/zones/db.kasper-vanderhulst.sb.uclllabs.be
 perl -i -pe '/Serial/ && s/(\d+)/$1+1 . $2/e' /etc/bind/zones/zone.$1
 
 #reload
