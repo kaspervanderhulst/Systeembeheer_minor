@@ -12,3 +12,8 @@ zone "kasper-vanderhulst.sb.uclllabs.be" {
   type master;
   file "/etc/bind/zones/db.kasper-vanderhulst.sb.uclllabs.be";
 };
+
+//zone "noa-andries.sb.uclllabs.be" IN {
+//	type slave;
+//	masters { 193.191.177.188;}:
+//};
