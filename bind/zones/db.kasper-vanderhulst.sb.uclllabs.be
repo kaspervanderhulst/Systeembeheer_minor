@@ -2,7 +2,7 @@
 ;
 $TTL	300
 @	IN	SOA	ns.kasper-vanderhulst.sb.uclllabs.be. host.kasper-vanderhulst.sb.uclllabs.be. (
-			     75		; Serial
+			    82		; Serial
 			    900		; Refresh
 			    120		; Retry
 			    900		; Expire
@@ -28,6 +28,12 @@ www2 IN A 193.191.177.166
 supersecure IN A 193.191.177.166
 secure IN A 193.191.177.166
 test IN A 193.191.177.254
+mail IN A 193.191.177.166
+
+@	IN	mx	10	mx 
+mx      IN 	A 	193.191.177.166
+
+; MRT
 foobar	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.
 foobar	IN	A	193.191.177.166
 bar	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.
@@ -58,8 +64,6 @@ subzoneua5ing	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.
 subzoneua5ing	IN	A	193.191.177.166
 kaspertest	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.
 kaspertest	IN	A	193.191.177.166
-	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.
-	IN	A	193.191.177.166
 kasperchecktest	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.
 kasperchecktest	IN	A	193.191.177.166
 subzonebee1ei	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.
