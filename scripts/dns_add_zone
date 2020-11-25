@@ -1,10 +1,9 @@
-#get the first argument from the command line
+#Get the name from the command line
 ZONE=$1
-
-#create a zone file with unique name
+#Create a new zone file for this ZONE
 touch /etc/bind/zones/zone.$1
 
-#add the settings to the zone file
+#Add the needed settings to this new zone file
 echo "\$TTL 360
 @    IN SOA ns.$1.kasper-vanderhulst.sb.uclllabs.be. host.kasper-vanderhulst.sb.uclllabs.be. (
 		0	; Serial
@@ -15,19 +14,19 @@ echo "\$TTL 360
 
 @		IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be." > /etc/bind/zones/zone.$1
 
-# Add the records for the new subzone to the main zone
+#Add the records for the new subzone to the main zone file 
 echo "$1	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be." >> /etc/bind/zones/db.kasper-vanderhulst.sb.uclllabs.be
 echo "$1	IN	A	193.191.177.166" >> /etc/bind/zones/db.kasper-vanderhulst.sb.uclllabs.be
 
-# put a description for the zone in the config
+#Add the zone to the config file
 echo "zone \"$1.kasper-vanderhulst.sb.uclllabs.be\" {
 	type master;
 	file \"/etc/bind/zones/zone.$1\";
 };" >> /etc/bind/named.conf.mrt-zones
 
-# Increment the serials by 1
+#Increment the serials by 1 in the files
 perl -i -pe '/Serial/ && s/(\d+)/$1+1 . $2/e' /etc/bind/zones/db.kasper-vanderhulst.sb.uclllabs.be
 perl -i -pe '/Serial/ && s/(\d+)/$1+1 . $2/e' /etc/bind/zones/zone.$1
 
-#reload
+#Reload rndc
 rndc reload
