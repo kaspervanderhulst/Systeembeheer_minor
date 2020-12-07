@@ -1,0 +1,140 @@
+[33mcommit 6ac5f321bce01f188dc18d61878d2e80f185fd57[m
+Author: kaspervanderhulst <kasper.vanderhulst@student.ucll.be>
+Date:   Wed Nov 18 10:51:50 2020 +0100
+
+    changes for dns and apache
+
+[1mdiff --git a/apache2/.certbot.lock b/apache2/.certbot.lock[m
+[1mdeleted file mode 100644[m
+[1mindex e69de29..0000000[m
+[1mdiff --git a/apache2/sites-available/000-default.conf b/apache2/sites-available/000-default.conf[m
+[1mindex 6854b8c..ae518f2 100644[m
+[1m--- a/apache2/sites-available/000-default.conf[m
+[1m+++ b/apache2/sites-available/000-default.conf[m
+[36m@@ -9,7 +9,7 @@[m
+ 	#ServerName www.example.com[m
+ [m
+ 	ServerName www.kasper-vanderhulst.sb.uclllabs.be[m
+[31m-	DocumentRoot /var/www/html/wwwy[m
+[32m+[m	[32mDocumentRoot /var/www/html/www[m
+ [m
+ 	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,[m
+ 	# error, crit, alert, emerg.[m
+[1mdiff --git a/apache2/sites-available/supersecure.conf b/apache2/sites-available/supersecure.conf[m
+[1mindex 7b4331f..58e5183 100644[m
+[1m--- a/apache2/sites-available/supersecure.conf[m
+[1m+++ b/apache2/sites-available/supersecure.conf[m
+[36m@@ -13,7 +13,8 @@[m
+ 	ErrorLog ${APACHE_LOG_DIR}/supersecure-error.log[m
+ 	CustomLog ${APACHE_LOG_DIR}/supersecure-access.log combined[m
+ [m
+[31m-SSLCertificateFile /etc/letsencrypt/live/secure.kasper-vanderhulst.sb.uclllabs.be/fullchain.pem[m
+[31m-SSLCertificateKeyFile /etc/letsencrypt/live/secure.kasper-vanderhulst.sb.uclllabs.be/privkey.pem[m
+[31m-Include /etc/letsencrypt/options-ssl-apache.conf[m
+[32m+[m	[32mSSLCertificateFile /etc/letsencrypt/live/secure.kasper-vanderhulst.sb.uclllabs.be/fullchain.pem[m
+[32m+[m	[32mSSLCertificateKeyFile /etc/letsencrypt/live/secure.kasper-vanderhulst.sb.uclllabs.be/privkey.pem[m
+[32m+[m	[32mInclude /etc/letsencrypt/options-ssl-apache.conf[m
+[32m+[m[41m	[m
+ </VirtualHost>[m
+[1mdiff --git a/apache2/sites-available/www.conf b/apache2/sites-available/www.conf[m
+[1mindex a51d607..355a96f 100644[m
+[1m--- a/apache2/sites-available/www.conf[m
+[1m+++ b/apache2/sites-available/www.conf[m
+[36m@@ -1,7 +1,6 @@[m
+ <VirtualHost *:80>[m
+ [m
+ 	ServerName www.kasper-vanderhulst.sb.uclllabs.be[m
+[31m-	ServerAlias kasper-vanderhulst.sb.uclllabs.be *.kasper-vanderhulst.sb.uclllabs.be[m
+ 	DocumentRoot /var/www/html/www[m
+ [m
+ 	LogLevel info[m
+[1mdiff --git a/apache2/sites-enabled/000-default.conf b/apache2/sites-enabled/000-default.conf[m
+[1mnew file mode 120000[m
+[1mindex 0000000..3c4632b[m
+[1m--- /dev/null[m
+[1m+++ b/apache2/sites-enabled/000-default.conf[m
+[36m@@ -0,0 +1 @@[m
+[32m+[m[32m../sites-available/000-default.conf[m
+\ No newline at end of file[m
+[1mdiff --git a/bind/named.conf.local b/bind/named.conf.local[m
+[1mindex 6d48275..e40f83e 100644[m
+[1m--- a/bind/named.conf.local[m
+[1m+++ b/bind/named.conf.local[m
+[36m@@ -6,7 +6,7 @@[m
+ // organization[m
+ //include "/etc/bind/zones.rfc1918";[m
+ [m
+[31m-//include "/etc/bind/named.conf.mrt-zones";[m
+[32m+[m[32minclude "/etc/bind/named.conf.mrt-zones";[m
+ [m
+ zone "kasper-vanderhulst.sb.uclllabs.be" {[m
+   type master;[m
+[1mdiff --git a/bind/zones/db.kasper-vanderhulst.sb.uclllabs.be b/bind/zones/db.kasper-vanderhulst.sb.uclllabs.be[m
+[1mindex 1880874..94d7b9c 100644[m
+[1m--- a/bind/zones/db.kasper-vanderhulst.sb.uclllabs.be[m
+[1m+++ b/bind/zones/db.kasper-vanderhulst.sb.uclllabs.be[m
+[36m@@ -2,7 +2,7 @@[m
+ ;[m
+ $TTL	300[m
+ @	IN	SOA	ns.kasper-vanderhulst.sb.uclllabs.be. host.kasper-vanderhulst.sb.uclllabs.be. ([m
+[31m-			     49		; Serial[m
+[32m+[m			[32m     75		; Serial[m
+ 			    900		; Refresh[m
+ 			    120		; Retry[m
+ 			    900		; Expire[m
+[36m@@ -82,3 +82,55 @@[m [msubzonele2di5	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+ subzonele2di5	IN	A	193.191.177.166[m
+ subzoneas9gei	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+ subzoneas9gei	IN	A	193.191.177.166[m
+[32m+[m[32msubzonemuy5ph	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzonemuy5ph	IN	A	193.191.177.166[m
+[32m+[m[32msubzonesa0ie3	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzonesa0ie3	IN	A	193.191.177.166[m
+[32m+[m[32msubzonequee4w	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzonequee4w	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneah1raz	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneah1raz	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneaz0boh	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneaz0boh	IN	A	193.191.177.166[m
+[32m+[m[32msubzonethieh3	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzonethieh3	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneeer6ai	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneeer6ai	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneuop1do	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneuop1do	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneyuqu6e	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneyuqu6e	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneaifu4p	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneaifu4p	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneeeng9t	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneeeng9t	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneju8lik	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneju8lik	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneshioz3	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneshioz3	IN	A	193.191.177.166[m
+[32m+[m[32msubzonephoh0a	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzonephoh0a	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneaav1ch	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneaav1ch	IN	A	193.191.177.166[m
+[32m+[m[32msubzonetheet9	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzonetheet9	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneaeyop0	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneaeyop0	IN	A	193.191.177.166[m
+[32m+[m[32msubzonehaa0pu	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzonehaa0pu	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneie0aeb	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneie0aeb	IN	A	193.191.177.166[m
+[32m+[m[32msubzonepa9viv	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzonepa9viv	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneavae5p	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneavae5p	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneaex9th	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneaex9th	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneeimee9	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneeimee9	IN	A	193.191.177.166[m
+[32m+[m[32mbarfoo	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32mbarfoo	IN	A	193.191.177.166[m
+[32m+[m[32mbarfoobar	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32mbarfoobar	IN	A	193.191.177.166[m
+[32m+[m[32msubzoneoev0ju	IN	NS	ns.kasper-vanderhulst.sb.uclllabs.be.[m
+[32m+[m[32msubzoneoev0ju	IN	A	193.191.177.166[m
