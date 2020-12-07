@@ -32,6 +32,8 @@ mail IN A 193.191.177.166
 
 @  IN AAAA 2001:6a8:2880:a077::a6
 ns IN AAAA 2001:6a8:2880:a077::a6
+mx IN AAAA 2001:6a8:2880:a077::a6
+
 
 @	IN	mx	10	mx 
 mx      IN 	A 	193.191.177.166
